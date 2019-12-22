@@ -2,9 +2,7 @@
   filter: none;
 }
 
-.grid-stack {
-  position: relative;
-}
+
 
 .grid-stack.grid-stack-rtl {
   direction: ltr;
@@ -16,11 +14,12 @@
 
 .grid-stack .grid-stack-placeholder > .placeholder-content {
   border: 1px dashed lightgray;
+  background-color: rgba(232, 236, 241, 0.5);
   margin: 0;
   position: absolute;
   top: 0;
-  left: 0px;
-  right: 0px;
+  left: 0;
+  right: 0;
   bottom: 0;
   width: auto;
   z-index: 0 !important;
@@ -37,14 +36,14 @@
   margin: 0;
   position: absolute;
   top: 0;
-  left: 0px;
-  right: 0px;
+  left: 0;
+  right: 0;
   bottom: 0;
+  width: auto;
   z-index: 0;
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 
 .grid-stack > .grid-stack-item > .ui-resizable-handle {
   position: absolute;

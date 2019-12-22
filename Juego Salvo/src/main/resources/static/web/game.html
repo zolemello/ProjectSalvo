@@ -1,107 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="css/images/deathstar.ico">
-    <title>Star Wars Space Battleship</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" href="dist/normalize.css" />
-    <link rel="stylesheet" href="dist/gridstack.css" />
-    <link rel="stylesheet" href="dist/gridstack-extra.css" />
-    <link rel="stylesheet" href="css/games_final.css">
-</head>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/normalize.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <title>Battle Grid</title>
+    </head>
 <body>
-<div class="container-fluid">
-    <header class="row">
-        <div class="col-12">
-            <img class="main-logo mx-auto d-block" src="css/images/star.png" alt="star-wars-space-battleship-main-logo">
+
+    <div class="flex-container">
+        <div id="dock">
+            
+            
+            
+            <!--The new ships will show up here, waiting for been placed in the grid -->
+        
         </div>
-    </header>
-    <section class="row justify-content-center">
-        <div id="app" class="col-11 col-lg-auto mb-4">
-            <!-- ------------------SECTION COL 1, MY SHIPS------------------ -->
-            <div class="col-auto">
-                <h1>
-                    <img  class="side-logo-in-game" src="css/images/rebellion.png">
-                    Alliance Fleet
-                </h1>
-                <div id="place-ships-card" class="card mb-2 text-center display-none">
-                    <h2 class="my-2">Place your Ships</h2>
-                    <div class="card-body pt-0 pb-3">
-                        Move with cursor. Double click to rotate. Battle when ready.
-                    </div>
-                    <button id="placed-ships-btn" type="button" class="btn btn-dark btn-block">Battle!</button>
-                </div>
-
-                <!-- ------------------GRIDSTACK FRAMEWORK------------------ -->
-                <div class="grid-ships mx-auto mb-4">
-                    <div id="grid" class="grid-stack grid-stack-10"></div>
-                </div>
-
-            </div>
-            <!-- ------------------SECTION COL 2, PLAYERS AND FIRES------------------ -->
-            <div class="col-auto">
-                <h1>Players</h1>
-                <div class="mb-4">
-                    <span id="p1" class="player-email py-2">{{player_1}}</span>
-                    <button id="logout" type="button" class="btn btn-dark btn-sm">Logout</button>
-                    <span id="p2" class="player-email py-2">{{player_2}}</span>
-                </div>
-                <!-- ------------------BATTLE STATE------------------ -->
-                <h1>Battle Log</h1>
-                <div id="battle-log" class="card mb-2">
-                    <h2 class="my-2">{{viewerSalvoTurn}}</h2>
-                    <div class="card-body pt-1 pb-3">
-                        <div class="mb-1 mx-4"></div>
-                    </div>
-                    <!-- ------------------SECTION COL 3, SALVOS------------------ -->
-                    <div id="salvo-col" class="col-auto display-none">
-                        <!-- ------------------SALVOS------------------ -->
-                        <h1>Blasting Grid</h1>
-                        <!-- ------------------FIRE SALVOS CARD------------------ -->
-                        <div id="fire-card" class="card mb-2 text-center display-none">
-                            <h2 class="my-2">Turn <span id="turn-number"></span>:</h2>
-                            <div id="salvo-action" class="card-body pt-0 pb-3">
-                                Wait for your turn and fire when Ready. Good luck!
-                            </div>
-                            <button id="fire-salvo-btn" type="button" class="btn btn-dark btn-block">Fire!</button>
-
-                        </div>
-                    </div>
-
-                    <table id="salvoGrid" class="mx-auto">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th v-for="number in grid.numbers">{{number}}</th>
-                        </tr>
-                        </thead>
-                        <tbody id="salvo-body">
-                        <tr v-for="letter in grid.letters" :class="letter">
-                            <td>{{letter}}</td>
-                            <td v-for="number in grid.numbers" :class="number"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        
+        <div class="grid active" id="grid-ships">
+            <!--The grid will appear here -->
         </div>
-    </section>
-    <footer class="row mb-4">
-        <div class="col-12 pb-4">
-            <audio id="audio-theme" class="mx-auto d-block" autoplay></audio>
+        <div class="grid" id="grid-salvoes">
+            
         </div>
-    </footer>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-<script src="dist/jquery-ui.min.js"></script>
-<script src="dist/gridstack.js"></script>
-<script src="dist/gridstack.jQueryUI.js"></script>
-<script src="game.js"></script>
+    </div>
+
+    
+    
+        
+    <script src="scripts/ships.js"></script>
+    <script src="scripts/grid.js"></script>
+    <script src="scripts/game.js"></script>
 </body>
 </html>
