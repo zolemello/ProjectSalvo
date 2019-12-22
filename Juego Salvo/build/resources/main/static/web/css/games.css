@@ -1,0 +1,399 @@
+/*----------------------------------STYLE RESET-----------------------------------*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*----------------------------------BODY AND HEADER-----------------------------------*/
+
+
+.container-fluid {
+    min-width: 425px;
+    min-height: 821px;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: auto;
+}
+.bkg-home {
+    background-image: url("images/spacebattle.jpg");
+    background-size: cover;
+}
+.bkg-empire {
+    background-image: url("images/empire-bkg.jpg");
+    background-size: cover;
+}
+.bkg-rebels {
+    background-image: url("images/rebel-bkg.jpg");
+    background-size: cover;
+}
+.main-logo {
+    height: 150px;
+}
+
+
+/*----------------------------------SECTION/GENERAL-----------------------------------*/
+h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid black;
+}
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+h3 {
+    font-size: 15px;
+}
+#app {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 30px 40px;
+    background-color:rgba(255,255,255,0.6);
+}
+b {
+    font-weight: bold;
+}
+.card {
+    background-color: rgba(245, 245, 245, 0.4);
+}
+.display-none {
+    display: none;
+}
+.display-block {
+    display: block;
+}
+
+/*----------------------------------SIGN FORM-----------------------------------*/
+.login-icon {
+    height: 25px;
+}
+#logged-in-name {
+    font-size: 20px;
+}
+
+input[type=radio] {
+    display: none;
+}
+input[type=radio]+label {
+    font-size: 18px;
+}
+
+#light-side-radio:hover+label {
+    background-color: #28a745;
+	border-radius: 50px;
+}
+#dark-side-radio:hover+label {
+    background-color: #dc3545;
+	border-radius: 50px;
+}
+
+input[type=radio]:checked+label {
+	border-radius: 50px;
+}
+#light-side-radio:checked+label {
+    background-color: #28a745;
+}
+#dark-side-radio:checked+label {
+    background-color: #dc3545;
+}
+
+.description-card {
+    max-width: 500px;
+    line-height: 25px;
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+}
+.side-description-img {
+    height: 140px;
+}
+
+
+/*----------------------------------LEADER BOARD AND LOGOS/AVATARS-----------------------------------*/
+.avatar {
+    height: 40px;
+    margin-top: -5px;
+    padding-bottom: 5px;
+}
+.side-logo {
+    height: 40px;
+}
+.side-logo-in-game {
+    height: 35px;
+    margin-top: -8px;
+    margin-left: 5px;
+}
+.table td, .table th {
+    vertical-align: middle;
+}
+#toggle-leaders-btn {
+    width: 40%;
+    margin: 0 29.75%;
+}
+
+
+/*----------------------------------GAMES LIST-----------------------------------*/
+#new-game-btn {
+    color: black;
+    font-size: 26px;
+}
+.game-list-container {
+    max-height: 400px;
+    overflow: auto;
+}
+
+li>ol {
+	list-style-type: decimal;
+}
+
+/*----------------------------------GRID DISPLAY-----------------------------------*/
+img.ship-img{
+    height: 35px;
+    width: 35px;
+}
+
+#battleshipGrid, #salvoGrid {
+    background-image: url("images/space.gif");
+    background-size: cover;
+    color: white;
+}
+
+#battleshipGrid>thead>tr>th, #battleshipGrid>tbody>tr>td {
+    border: 1px solid grey;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+}
+#salvoGrid>thead>tr>th, #salvoGrid>tbody>tr>td {
+    border: 1px solid grey;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+}
+
+/*----------------------------------MEDIA QUERYS-----------------------------------*/
+@media screen and (max-width: 600px) {
+  #place-ships-card {
+    width: 385px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .main-logo {
+      height: 125px;
+  }
+  #battleshipGrid>thead>tr>th, #battleshipGrid>tbody>tr>td, th, td {
+      height: 25px;
+      width: 25px;
+  }
+  img.ship-img{
+      height: 25px;
+      width: 25px;
+  }
+  .player-email {
+      display: block;
+  }
+}
+/*----------------------------------SHIPS-----------------------------------*/
+.bg-ship {
+    background-color: black;
+}
+.bg-salvo {
+    background-color: red;
+}
+
+/*----------------------------------DARK-LIGHT-SIDE-EFFECTS-----------------------------------*/
+.text-DARK {
+    text-shadow: 0 0 3px #dc3545;
+}
+
+.text-LIGHT {
+    text-shadow: 0 0 3px #28a745;
+}
+.btn-primary {
+    background-color: #0099ff;
+    border-color: #0099ff;
+}
+
+.shd-light {
+    box-shadow:0 0 40px rgba(40, 167, 69) inset;
+}
+.shd-dark {
+    box-shadow:0 0 40px rgba(220, 53, 69) inset;
+}
+
+
+/*----------------------------------------------GRIDSTACK SHIPS----------------------------------------------*/
+
+.grid-ships {
+    background-image: url("images/grid-bg.png"), url("images/space.gif");
+    background-size: cover;
+    height: 385px;
+    width: 385px;
+    padding-top: 35px;
+    padding-left: 35px;
+}
+.grid-stack-item-content {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
+.grid-stack-item {
+    background-color:rgba(255,255,255,0.2);
+}
+
+#dark-cruiser-img-v {
+    height: 185px;
+    width: 54px;
+    left: -9px;
+}
+#dark-cruiser-img-h {
+    height: 54px;
+    width: 185px;
+    top: -10px;
+}
+#dark-destroyer-img-v {
+    height: 150px;
+    width: 40px;
+    top: -6px;
+    left: -4px;
+}
+#dark-destroyer-img-h {
+    width: 150px;
+    height: 40px;
+    top: -3px;
+    left: -6px;
+}
+#dark-bomber-img-v {
+    height: 95px;
+    width: 60px;
+    left: -13px;
+    top: 5px;
+}
+#dark-bomber-img-h {
+    width: 95px;
+    height: 60px;
+    top: -12px;
+    left: 5px;
+}
+#dark-fighter-img-v {
+    height: 115px;
+    width: 45px;
+    left: -5px;
+}
+#dark-fighter-img-h {
+    width: 115px;
+    height: 45px;
+    top: -5px;
+}
+#dark-starfighter-img-v {
+    height: 70px;
+    width: 55px;
+    top: 8px;
+    left: -10px;
+}
+#dark-starfighter-img-h {
+    width: 70px;
+    height: 55px;
+    left: 8px;
+    top: -10px;
+}
+
+
+
+#light-cruiser-img-v {
+    height: 200px;
+    width: 55px;
+    left: -10px;
+    top: -10px;
+}
+#light-cruiser-img-h {
+    height: 55px;
+    width: 200px;
+    top: -10px;
+    left: -10px;
+}
+#light-destroyer-img-v {
+    height: 130px;
+    width: 47px;
+    left: -7px;
+    top: 7px;
+}
+#light-destroyer-img-h {
+    width: 130px;
+    height: 47px;
+    top: -6px;
+    left: 7px;
+}
+#light-bomber-img-v {
+    height: 125px;
+    width: 55px;
+    left: -12px;
+    top: -5px;
+}
+#light-bomber-img-h {
+    width: 125px;
+    height: 55px;
+    top: -8px;
+    left: -2px;
+}
+#light-fighter-img-v {
+    height: 104px;
+    width: 50px;
+    left: -6px;
+    top: -2px;
+}
+#light-fighter-img-h {
+    width: 104px;
+    height: 50px;
+    top: -8px;
+    left: 3px;
+}
+#light-starfighter-img-v {
+    height: 95px;
+    width: 51px;
+    left: -8px;
+    top: -5px;
+}
+#light-starfighter-img-h {
+    width: 95px;
+    height: 51px;
+    left: -5px;
+    top: -8px;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SW Space Battleship Games</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="mb-2">
+                        <span id="login-alert" style="color: red;"></span>
+                    </div>
+                    <label class="sr-only" for="inputUserName">Username</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="email" class="form-control form-control-sm" id="inputUserName" name="username">
+                    </div>
+                    <label class="sr-only" for="inputPassword">Password</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+
+                        </div>
+                        <input type="password" class="form-control form-control-sm" id="inputPassword"  name="password">
+                    </div>
+                    <button id="login-btn" type="button" class="btn btn-dark">Login</button>
+                    <span class="align-middle ml-2">New Player?</span>
+                    <button id="go-to-sign-up-btn" type="button" class="btn btn-link px-0">Sign Up!</button>
+                </form>
+                <form id="signUp-form" style="display: none;">
+                    <div class="mb-2">
+                        <span id="signUp-alert" style="color: red;"></span>
+                    </div>
+                    <label class="mb-2" for="inputEmail">Enter email:</label>
+                    <div class="input-group mb-2">
+                        <input type="email" class="form-control form-control-sm" id="inputEmail" placeholder="Email" name="email">
+                    </div>
+                    <label class="mb-2" for="signPassword">Enter password:</label>
+                    <div class="input-group mb-2">
+                        <input type="password" class="form-control form-control-sm" id="signPassword" placeholder="Password" name="pass">
+                    </div>
+                    <div>
+                        <button id="sign-up-btn" type="button" class="btn btn-dark">Start playing!</button>
+                        <button id="back-to-login-btn" type="button" class="btn btn-link">Back to Login</button>
+                    </div>
+                </form>
+
+                <form id="logout-form">
+                    <span id="logged-in-name" class="align-middle mx-3"></span>
+                    <button id="logout-btn" type="button" class="btn btn-dark">Logout</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <header>
+
+        <div class="row">
+        <div class="col-12">
+           <img src="imgs/header-web.jpg" alt="header" class="img-fluid" >
+        </div>
+        </div>
+
+    </header>
+    <section class="row justify-content-center">
+        <div id="app" class="col-12 col-sm-11 col-lg-auto mb-4">
+            <div class="row">
+                <div class="col-12 text-center">
+
+
+                            <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#login">
+                                Log in
+                            </button>
+
+
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-auto">
+                    <h1>Space Leaders</h1>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-borderless border border-dark">
+                            <thead class="border-bottom border-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Total</th>
+                                <th>Won</th>
+                                <th>Lost</th>
+                                <th>Tied</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="player in playersLeaderBoard" v-if="player.total>0">
+                                <td>{{player.email}}</td>
+                                <td>{{player.total}}</td>
+                                <td>{{player.win}}</td>
+                                <td>{{player.lost}}</td>
+                                <td>{{player.tied}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-auto mb-5">
+                    <h1>Games</h1>
+                    <div id="creation-game" class="mb-2">
+                        <button v-if="current_player !== null" type="button" id="new-game-btn" class="btn btn-dark btn-lg btn-block"><b>New Game</b></button>
+                        <span id="fail-creation-game-alert"></span>
+                    </div>
+                    <ol>
+                        <li v-for="game in games" class="gameList"><strong>Game {{game.id}}, created: {{game.created}}</strong>
+                            <h3 class="ml-2 my-1">Players:</h3>
+                            <ol class="ml-5">
+                                <li v-for="player in game.players">
+                                    {{player.email}}
+                                    <div v-if="current_player !==null && current_player.id == player.id">
+                                        <button :data-game="player.gpid" type="button" class="rejoin-game-btn btn btn-dark btn-sm mt-2">Re-Join Game</button>
+
+                                    </div>
+                                </li>
+                            </ol>
+                            <div v-if="game.players.length < 2 && current_player !== null && current_player.id !== game.players[0].id">
+                                <button :data-game="game.id" type="button" class="join-game-btn btn btn-dark btn-sm mt-2">Join Game</button>
+                                <span :data-game="game.id" class="fail-joining-game-alert text-red"></span>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="games2.js"></script>
+</body>
+</html>

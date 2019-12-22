@@ -1,0 +1,322 @@
+/*----------------------------------STYLE RESET-----------------------------------*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*----------------------------------HEADER-----------------------------------*/
+
+.container-fluid {
+    min-width: 320px;
+    min-height: 1080px;
+    max-width: 1920px;
+    max-height: 1080px;
+    background-image: url("images/spacebattle.jpg");
+    overflow: auto;
+}
+.main-logo {
+    height: 150px;
+}
+
+/*----------------------------------SECTION/GENERAL-----------------------------------*/
+h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+h3 {
+    font-size: 15px;
+}
+#app {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 30px 40px;
+    background-color:rgba(255,255,255,0.6);
+}
+b {
+    font-weight: bold;
+}
+
+/*----------------------------------GAMES LIST-----------------------------------*/
+.gameList {
+    margin-top: 20px;
+}
+li>ol {
+	list-style-type: decimal;
+}
+
+/*----------------------------------GRID DISPLAY-----------------------------------*/
+img.ship-img{
+    height: 35px;
+    width: 35px;
+}
+
+#battleshipGrid>thead>tr>th, #battleshipGrid>tbody>tr>td {
+    border: 1px solid black;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+}
+#salvoGrid>thead>tr>th, #salvoGrid>tbody>tr>td {
+    border: 1px solid black;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .main-logo {
+      height: 100px;
+  }
+  #battleshipGrid>thead>tr>th, #battleshipGrid>tbody>tr>td, th, td {
+      height: 25px;
+      width: 25px;
+  }
+  img.ship-img{
+      height: 25px;
+      width: 25px;
+  }
+  .player-email {
+      display: block;
+  }
+}
+/*----------------------------------SHIPS-----------------------------------*/
+.bg-ship {
+    background-color: black;
+}
+.bg-salvo {
+    background-color: red;
+}
+
+/*----------------------------------LOGIN-SIGN-UP-FORM-----------------------------------*/
+.card {
+    background-color: rgba(245, 245, 245, 0.4);
+}
+#logged-in-name {
+    font-size: 20px;
+}
+
+/*--------------------------------------MEDIA QUERYS-----------------------------------*/
+@media screen and (max-width: 500px) {
+  .main-logo {
+      height: 125px;
+  }
+}
+/*----------------------------------LIGHT-SIDE-EFFECTS-----------------------------------*/
+
+.text-LIGHT {
+    text-shadow: 0 0 3px #00FF00;
+}
+
+/*--------------------------------------PLAYERS---------------------------------------*/
+#p1, #p2 {
+    font-size: 18px;
+    padding: 4.5%;
+}
+.para {
+  box-shadow: 5px 5px 0 rgba(0,0,0,.5);
+  height: 45px;
+  width: 300px;
+}
+.para-LIGHT {
+  border: 2px solid #28a745;
+  background-color: rgba(40, 167, 69, 0.6);
+}
+
+.parallelogram{
+  transform: skew(-20deg);
+}
+.skew-fix{
+  display:inline-block;
+  transform: skew(20deg);
+}
+#logout {
+    position: absolute;
+    right: 24px;
+    top: 60px;
+    z-index:1;
+}
+
+/*----------------------------------BATTLE LOG-----------------------------------*/
+#salvo-action {
+    line-height: 22px;
+}
+/*----------------------------------SALVO GRID DISPLAY-----------------------------------*/
+
+#salvoGrid {
+    background-image: url("images/space.gif");
+    background-size: cover;
+    color: white;
+}
+
+#salvoGrid>thead>tr>th, #salvoGrid>tbody>tr>td {
+    border: 1px solid grey;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+.spark-salvo {
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+}
+.aim-img {
+    height: 24px;
+    width: 24px;
+}
+.bg-salvo {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+/*-----------------------------------------HIT AND SINK SHIPS-----------------------------------------*/
+.spark {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+.remaining-ship-light {
+    margin: 0 1%;
+}
+/*-----------------light ships----------------*/
+#light-starfighter-img-v2 {
+    height: 57px;
+    width: 31px;
+}
+#light-fighter-img-h2 {
+    width: 62px;
+    height: 30px;
+}
+#light-bomber-img-v2 {
+    height: 75px;
+    width: 33px;
+}
+#light-destroyer-img-v2 {
+    height: 78px;
+    width: 28px;
+}
+#light-cruiser-img-v2 {
+    height: 120px;
+    width: 33px;
+    margin-bottom: -8px;
+    margin-top: -5px;
+}
+
+/*----------------------------------------------GRIDSTACK SHIPS----------------------------------------------*/
+
+.grid-ships {
+    background-image: url("images/grid-bg.png"), url("images/space.gif");
+    background-size: cover;
+    height: 385px;
+    width: 385px;
+    padding-top: 35px;
+    padding-left: 35px;
+}
+.grid-stack-item-content {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
+.grid-stack-item {
+    background-color:rgba(255,255,255,0.2);
+}
+
+/*-----------------light ships----------------*/
+#light-cruiser-img-v {
+    height: 200px;
+    width: 55px;
+    left: -10px;
+    top: -10px;
+}
+#light-cruiser-img-h {
+    height: 55px;
+    width: 200px;
+    top: -10px;
+    left: -10px;
+}
+#light-destroyer-img-v {
+    height: 130px;
+    width: 47px;
+    left: -7px;
+    top: 7px;
+}
+#light-destroyer-img-h {
+    width: 130px;
+    height: 47px;
+    top: -6px;
+    left: 7px;
+}
+#light-bomber-img-v {
+    height: 125px;
+    width: 55px;
+    left: -12px;
+    top: -5px;
+}
+#light-bomber-img-h {
+    width: 125px;
+    height: 55px;
+    top: -8px;
+    left: -2px;
+}
+#light-fighter-img-v {
+    height: 104px;
+    width: 50px;
+    left: -6px;
+    top: -2px;
+}
+#light-fighter-img-h {
+    width: 104px;
+    height: 50px;
+    top: -8px;
+    left: 3px;
+}
+#light-starfighter-img-v {
+    height: 95px;
+    width: 51px;
+    left: -8px;
+    top: -5px;
+}
+#light-starfighter-img-h {
+    width: 95px;
+    height: 51px;
+    left: -5px;
+    top: -8px;
+}
