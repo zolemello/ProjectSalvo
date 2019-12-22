@@ -16,7 +16,7 @@ function getGameData(gpId, viewShips){
 									            </div>
 									            `
 	document.getElementById("grid-ships").innerHTML = ""
-	document.getElementById("grid-salvoes").innerHTML = ""
+	document.getElementById("grid-salvos").innerHTML = ""
 	
 	createGrid(11, document.getElementById('grid-ships'), 'ships')
 	
@@ -35,11 +35,11 @@ function getGameData(gpId, viewShips){
 
 		 if(data.ships.length > 0){
 		 	getShips(data.ships)
-		 	createGrid(11, document.getElementById('grid-salvoes'), 'salvoes')
+		 	createGrid(11, document.getElementById('grid-salvos'), 'salvos')
 		 	document.getElementById('grid-ships').classList.add('active')
-		 	document.getElementById('grid-salvoes').classList.remove('active')
+		 	document.getElementById('grid-salvos').classList.remove('active')
 		 	document.getElementById("board").innerHTML += '<div class="hide" id="fire"><button class="btn" onclick="readyToShoot()">Fire!</button></div>'
-		 	document.getElementById("board").innerHTML += '<div><button id="grid-view" class="btn" onclick="gridView(event)">View Salvoes</button></div>'
+		 	document.getElementById("board").innerHTML += '<div><button id="grid-view" class="btn" onclick="gridView(event)">View salvos</button></div>'
 		 	if(!viewShips){
 		 		document.getElementById('grid-view').click()
 		 	}
@@ -61,8 +61,8 @@ function getGameData(gpId, viewShips){
 		 		opponent = e.player
 		 	}
 		 }) 
-		 if(data.salvoes.length > 0){
-		 	getSalvoes(data.salvoes, player.id)
+		 if(data.salvos.length > 0){
+		 	getsalvos(data.salvos, player.id)
 		 }
 		 
 
@@ -89,11 +89,11 @@ function getShips(ships){
 	})
 }
 
-function getSalvoes(salvoes, playerId){
-	salvoes.forEach(salvo => {
+function getsalvos(salvos, playerId){
+	salvos.forEach(salvo => {
 		salvo.locations.forEach(loc => {
 			if(salvo.player == playerId){
-				let cell = document.getElementById("salvoes"+loc)
+				let cell = document.getElementById("salvos"+loc)
 				salvo.hits.includes(loc) ? cell.classList.add('hit') : cell.classList.add('water')
 				cell.innerText = salvo.turn
 			}else{
@@ -109,7 +109,7 @@ function getSalvoes(salvoes, playerId){
 			salvo.sunken.forEach(ship => {
 				if(salvo.player == playerId){
 					ship.locations.forEach(loc => {
-						let cell = document.getElementById("salvoes"+loc)
+						let cell = document.getElementById("salvos"+loc)
 						cell.classList.add('sunken')
 					})
 				}
@@ -195,7 +195,7 @@ function sendShips(ships,gamePlayerId){
 }
 
 function shoot(shots,gamePlayerId){
-	let url = '/api/games/players/'+gamePlayerId+'/salvoes'
+	let url = '/api/games/players/'+gamePlayerId+'/salvos'
 	let init = {
 		method: 'POST',
 		headers: {
@@ -231,7 +231,7 @@ function readyToShoot(){
 
 function gridView(ev){
 
-	let text = ev.target.innerText == "View Salvoes" ? "View Ships" : "View Salvoes"
+	let text = ev.target.innerText == "View salvos" ? "View Ships" : "View salvos"
 
 	ev.target.innerText = text
 
@@ -240,7 +240,7 @@ function gridView(ev){
 }
 
 function target(){
-	document.querySelectorAll("#grid-salvoes .grid-cell").forEach(cell => cell.addEventListener('click',aim))
+	document.querySelectorAll("#grid-salvos .grid-cell").forEach(cell => cell.addEventListener('click',aim))
 }
 
 function aim(evt){

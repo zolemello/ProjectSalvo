@@ -50,7 +50,7 @@ public class SalvovbApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepo, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository) {
+	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository) {
 		return (args) -> {
 			// save a couple of players
 			Player player1=new Player("j.bauer@ctu.gov", passwordEncoder().encode("24"));
@@ -72,11 +72,11 @@ public class SalvovbApplication {
 			gameRepository.save(game4);
 
 			GamePlayer gp1=new GamePlayer(game1, player1);
-			gamePlayerRepo.save(gp1);
+			gamePlayerRepository.save(gp1);
 			GamePlayer gp2=new GamePlayer(game1, player2);
-			gamePlayerRepo.save(gp2);
+			gamePlayerRepository.save(gp2);
 			GamePlayer gp3=new GamePlayer(game2, player1);
-			gamePlayerRepo.save(gp3);
+			gamePlayerRepository.save(gp3);
 
 			String fighter = "Fighter";
 			String cruiser = "Cruiser";
@@ -156,11 +156,11 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 		auth.userDetailsService(inputName-> {
 			Player player = playerRepository.findByUserName(inputName);
 			if (player != null) {
-				System.out.println("entré :)");
+				
 				return new User(player.getUserName(), player.getPassword(),
 						AuthorityUtils.createAuthorityList("USER"));
 			} else {
-				System.out.println("no existe ese jugador! :(");
+				
 				throw new UsernameNotFoundException("Unknown user: " + inputName);
 			}
 		});

@@ -63,7 +63,7 @@ public class Game {
     public boolean getEndDate(Set<GamePlayer> gamePlayers) {
 
         GamePlayer gamePlayer = gamePlayers.stream().findFirst().orElse(null);
-        if ( (null != gamePlayer) && (gamePlayer.getGameState() == GamePlayerState.WIN || gamePlayer.getGameState() == GamePlayerState.LOSE || gamePlayer.getGameState() == GamePlayerState.DRAW)) {
+        if ( (null != gamePlayer) && (gamePlayer.getEstadoJuego() == GamePlayerState.WIN || gamePlayer.getEstadoJuego() == GamePlayerState.LOSE || gamePlayer.getEstadoJuego() == GamePlayerState.DRAW)) {
             return true;
         } else {
             return false;

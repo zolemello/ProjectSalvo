@@ -59,8 +59,8 @@ function loadData() {
                 $("#salvo-col").removeClass("display-none");
                 $("#salvo-col").addClass("display-block");
             }
-            getCurrentTurn(gameDTO.salvoes);
-            displaySalvoes(gamePlayerId, gameDTO);
+            getCurrentTurn(gameDTO.salvos);
+            displaysalvos(gamePlayerId, gameDTO);
         }
 
         if (app.viewerGameState === "WIN" || app.viewerGameState === "LOSE" || app.viewerGameState === "DRAW") {
@@ -113,13 +113,13 @@ function getQueryVariable(variable) {
 }
 
 //-------------------------------------------------------DISPLAY SALVOS FUNCTION---------------------------------------------------------
-function displaySalvoes(gamePlayerId, gameDTO) {
+function displaysalvos(gamePlayerId, gameDTO) {
 
    for (var i=0;i<gameDTO.gamePlayers.length;i++){
 
        if (gameDTO.gamePlayers[i].gpid == gamePlayerId) {
            var thisPlayerId = gameDTO.gamePlayers[i].id;
-           gameDTO.salvoes.map(function (salvo) {
+           gameDTO.salvos.map(function (salvo) {
                if (salvo.player == thisPlayerId) {
                    var myTurn = salvo.turn;
                    for (var e=0;e<salvo.locations.length;e++){
@@ -505,13 +505,13 @@ function postSalvos(salvoJSON) {
 
 
 //-------------------------------------------------------DISPLAY SALVOS FUNCTION---------------------------------------------------------
-function displaySalvoes(gamePlayerId, gameDTO) {
-    console.log("Ingrese a display salvoes");
+function displaysalvos(gamePlayerId, gameDTO) {
+    console.log("Ingrese a display salvos");
    for (var i=0;i<gameDTO.gamePlayers.length;i++){
 
        if (gameDTO.gamePlayers[i].gpid == gamePlayerId) {
            var thisPlayerId = gameDTO.gamePlayers[i].id;
-           gameDTO.salvoes.map(function (salvo) {
+           gameDTO.salvos.map(function (salvo) {
 
                if (salvo.player == thisPlayerId) {
                // --------------------------------------------------- HITS or MISSES ----------------------------------------------------
