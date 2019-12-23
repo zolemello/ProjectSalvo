@@ -132,7 +132,7 @@
                                 <li v-for="player in game.players">
                                     {{player.email}}
                                     <div v-if="current_player !==null && current_player.id == player.id">
-                                        <button :data-game="player.gpid" type="button" class="rejoin-game-btn btn btn-dark btn-sm mt-2">Re-Join Game</button>
+                                        <button :data-game="player.gpId" type="button" class="rejoin-game-btn btn btn-dark btn-sm mt-2">Re-Join Game</button>
 
                                     </div>
                                 </li>

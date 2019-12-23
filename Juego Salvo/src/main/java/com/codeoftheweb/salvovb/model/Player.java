@@ -80,4 +80,56 @@ public class Player {
         return maybeScore;
     }
 
+
+    //dto para para administrar la info de Player
+	//ACA TAMBIEN ESTA LA INFO PARA CUANDO GANA, PIERDE Y EMPATA
+    public Map<String, Object> playerDTO(){
+        Map<String, Object> dto = new LinkedHashMap<>();
+
+        //int totalWon = this.getWons().size();
+        Integer totalLose = this.getLoss().size();
+        Integer totalTie = this.getTies().size();
+        
+
+        dto.put("id", this.getId_player());
+        dto.put("username", this.getUserName());
+
+        dto.put("won", this.getWons());
+        dto.put("lose", totalLose);
+        dto.put("tie", totalTie);
+        dto.put("total", this.getTotalPoints());
+        return dto;
+    }
+
+    // ESTOS OBTIENEN LOS PUNTOS POR PERDER, EMPATAR O GANAR, Y LUEGO LOS PUNTOS TOTALES
+    // HACE UN FILTRO, PONE EN UNA VARIABLE EL VALOR, Y HACE UN SET EN DONDE PONE TODOS ESOS VALORES
+    public Set<Score> getLoss() {
+        return this.scores.stream()
+                .filter(lossScore -> lossScore.getScore() == 0)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Score> getTies() {
+        return this.scores.stream()
+                .filter(tieScore -> tieScore.getScore() == 0.5)
+                .collect(Collectors.toSet());
+    }
+
+    public int getWons() {
+        return this.scores.stream()
+                .filter(wonScore -> wonScore.getScore() == 1)
+                .collect(Collectors.toSet())
+                .size();
+    }
+
+
+
+
+
+    public int getTotalPoints() {
+        return this.getWons() * 3 + getTies().size();
+    }
+
+
+
 }

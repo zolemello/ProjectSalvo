@@ -1,7 +1,9 @@
 package com.codeoftheweb.salvovb.model;
 
+import com.codeoftheweb.salvovb.repository.GamePlayerRepository;
 import com.codeoftheweb.salvovb.rest.controller.SalvoRestController;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.*;
@@ -11,6 +13,11 @@ import java.util.stream.Collectors;
 
 @Entity
 public class GamePlayer {
+
+    @Autowired
+    private GamePlayerRepository gamePlayerRepository;
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -31,17 +38,6 @@ public class GamePlayer {
     @OneToMany(mappedBy="gameplayer", fetch=FetchType.EAGER)
     Set<Salvo> salvos=new HashSet<>();
 
-    private String 
-        WAIT_OPPONENT,
-        PLACE_SHIPS,
-        WAIT_OPPONENT_SHIPS,
-        ENTER_SALVO,
-        WAIT_OPPONENT_SALVO,
-        WIN,
-        DRAW,
-        LOSE,
-        ERROR; 
-    
 
     public GamePlayer() {
         this.creationDate=new Date();
@@ -81,11 +77,11 @@ public class GamePlayer {
         this.ships = ships;
     }
 
-    public Set<Salvo> getsalvos() {
+    public Set<Salvo> getSalvos() {
         return salvos;
     }
 
-    public void setsalvos(Set<Salvo> salvos) {
+    public void setSalvos(Set<Salvo> salvos) {
         this.salvos = salvos;
     }
 
@@ -101,60 +97,33 @@ public class GamePlayer {
         this.creationDate = creationDate;
     }
 
-   
-    public String getEstadoJuego() {
-        Optional <GamePlayer> opponentGamePlayer = this.getGame().getGame_players().stream().filter(gamePlayer1 -> gamePlayer1.getId_gameplayer() != this.getId_gameplayer()).findFirst();
-        long lastTurn = this.getsalvos().stream().mapToLong(Salvo::getTurn).max().orElse(0);
-        int totalShips = 5;
-
-          String response = ERROR; 
-        
-        if (!opponentGamePlayer.isPresent()) {
-            response = WAIT_OPPONENT;
-        } else {
-            if (this.getShips().isEmpty()) {
-                response = PLACE_SHIPS;
-            } else if (opponentGamePlayer.get().getShips().isEmpty()) {
-                response = WAIT_OPPONENT_SHIPS;
-            } else {
-                if ((this.getsalvos().size() == opponentGamePlayer.get().getsalvos().size()) && (this.getSinks(lastTurn, this.getsalvos(), opponentGamePlayer.get().getShips()).size() == totalShips) && (this.getSinks(lastTurn, opponentGamePlayer.get().getsalvos(), this.getShips()).size() < totalShips)) {
-                    response = WIN;
-                } else if ((this.getsalvos().size() == opponentGamePlayer.get().getsalvos().size()) && (this.getSinks(lastTurn, this.getsalvos(), opponentGamePlayer.get().getShips()).size() == totalShips) && (this.getSinks(lastTurn, opponentGamePlayer.get().getsalvos(), this.getShips()).size() == totalShips)) {
-                    response = DRAW;
-                } else if ((this.getsalvos().size() == opponentGamePlayer.get().getsalvos().size()) && (this.getSinks(lastTurn, this.getsalvos(), opponentGamePlayer.get().getShips()).size() < totalShips) && (this.getSinks(lastTurn, opponentGamePlayer.get().getsalvos(), this.getShips()).size() == totalShips)) {
-                    response = LOSE;
-                } else if ((this.getId_gameplayer() < opponentGamePlayer.get().getId_gameplayer()) && (this.getsalvos().size() == opponentGamePlayer.get().getsalvos().size())) {
-                    response = ENTER_SALVO;
-                } else if ((this.getId_gameplayer() < opponentGamePlayer.get().getId_gameplayer()) && (this.getsalvos().size() > opponentGamePlayer.get().getsalvos().size())) {
-                    response = WAIT_OPPONENT_SALVO;
-                } else if ((this.getId_gameplayer() > opponentGamePlayer.get().getId_gameplayer()) && (this.getsalvos().size() < opponentGamePlayer.get().getsalvos().size())) {
-                    response = ENTER_SALVO;
-                } else if ((this.getId_gameplayer() > opponentGamePlayer.get().getId_gameplayer()) && (this.getsalvos().size() == opponentGamePlayer.get().getsalvos().size())) {
-                    response = WAIT_OPPONENT_SALVO;
-                }
-            }
-        }
-        return response;
+    public enum GameState {
+        UNDEFINED,
+        ENTER_SHIPS,
+        WAIT_OPPONENT,
+        WAIT_OPPONENT_SHIPS,
+        FIRE,
+        WAIT,
+        WON,
+        LOST,
+        TIED,
+        ERROR
     }
    
 
-    public List<Map<String, Object>> getSinks(long turn, Set <Salvo> salvos, Set<Ship> ships) {
-        List<String> allShots = new ArrayList<>();
-        salvos
-                .stream()
-                .filter(salvo -> salvo.getTurn() <= turn)
-                .forEach(salvo -> allShots.addAll(salvo.getLocations()));
-        return ships
-                .stream()
-                .filter(ship -> allShots.containsAll(ship.getShipLocations()))
-                .map(ship -> new SalvoRestController().makeShipDto(ship))
-                .collect(Collectors.toList());
+    // VER COMO HACER ESTE PUNTO 
+    //LO DEJO ASI PARA QUE NO ROMPA EN LOS OTROS LUGARES
+    public Enum<GameState> getEstadoJuego(){
+        
+
+        Optional <GamePlayer> opponentGamePlayer = this.getGame().getGame_players().stream().filter(gamePlayer1 -> gamePlayer1.getId_gameplayer() != this.getId_gameplayer()).findFirst();
+
+       return null ;
     }
 
     public void addSalvo(Salvo salvo) {
         salvo.setGameplayer(this);
         salvos.add(salvo);
     }
-
-	
+   
 }

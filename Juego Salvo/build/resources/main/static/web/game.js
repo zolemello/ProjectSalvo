@@ -78,11 +78,11 @@ function loadData() {
 function showPlayersByGamePlayerId(id, obj) {
 
     obj.gamePlayers.map(function (gamePlayer) {
-        if (id == gamePlayer.gpid) {
+        if (id == gamePlayer.gpId) {
             app.player_1 = gamePlayer.email + " (you)";
             app.viewerPlayerId = gamePlayer.id;
             app.viewerGameState = gamePlayer.gameState;
-        } else if (id != gamePlayer.gpid) {
+        } else if (id != gamePlayer.gpId) {
             app.player_2 = " vs " + gamePlayer.email;
         }
     });
@@ -117,7 +117,7 @@ function displaysalvos(gamePlayerId, gameDTO) {
 
    for (var i=0;i<gameDTO.gamePlayers.length;i++){
 
-       if (gameDTO.gamePlayers[i].gpid == gamePlayerId) {
+       if (gameDTO.gamePlayers[i].gpId == gamePlayerId) {
            var thisPlayerId = gameDTO.gamePlayers[i].id;
            gameDTO.salvos.map(function (salvo) {
                if (salvo.player == thisPlayerId) {
@@ -509,7 +509,7 @@ function displaysalvos(gamePlayerId, gameDTO) {
     console.log("Ingrese a display salvos");
    for (var i=0;i<gameDTO.gamePlayers.length;i++){
 
-       if (gameDTO.gamePlayers[i].gpid == gamePlayerId) {
+       if (gameDTO.gamePlayers[i].gpId == gamePlayerId) {
            var thisPlayerId = gameDTO.gamePlayers[i].id;
            gameDTO.salvos.map(function (salvo) {
 

@@ -63,7 +63,6 @@ $.post("/api/players", { username: $("#inputEmail").val(), password: $("#signPas
 .done(function() {
 $.post("/api/login", { username: $("#inputEmail").val(), password: $("#signPassword").val() })
 .done(function() {
-$("#signUp-alert").html("");
 getGames();
 $("#signUp-form").hide();
 })
@@ -72,7 +71,7 @@ $("#signUp-alert").html("Login error. Please try again");
 })
 })
 .fail(function() {
-$("#signUp-alert").html("This user already exist");
+$("#signUp-alert").html("User already exist");
 })
 }
 });
@@ -152,25 +151,25 @@ return b.total - a.total;
 });
 
 
-for (let m = 0; m < players.length; m++) {
-let countWon = 0;
-let countLost = 0;
-let countTied = 0;
+for (let i = 0; i < players.length; i++) {
+let cantWon= 0;
+let cantLost = 0;
+let cantTied = 0;
 
-if (players[m].scores.length > 0) {
+if (players[i].scores.length > 0) {
 
-for (let n = 0; n < players[m].scores.length; n++) {
-if (players[m].scores[n] == 0.0) {
-countLost++;
-} else if (players[m].scores[n] == 0.5) {
-countTied++;
-} else if (players[m].scores[n] == 1.0) {
-countWon++;
+for (let j = 0; j < players[i].scores.length; j++) {
+if (players[i].scores[j] == 0.0) {
+cantLost++;
+} else if (players[i].scores[j] == 0.5) {
+cantTied++;
+} else if (players[i].scores[j] == 1.0) {
+cantWon++;
 }
 }
-players[m].lost=countLost;
-players[m].tied=countTied;
-players[m].win=countWon;
+players[i].lost=cantLost;
+players[i].tied=cantTied;
+players[i].win=cantWon;
 }
 }
 }
@@ -207,7 +206,7 @@ return players;
 $("#app").on("click", "#new-game-btn", function() {
 $.post("/api/games").done(function(response) {
 $("#fail-creation-game-alert").html("");
-location.assign("/web/game.html?gp="+response.gpid);
+location.assign("/web/game.html?gp="+response.gpId);
 }).fail(function() {
 $("#fail-creation-game-alert").html("Something went wrong. Please try again later");
 })
@@ -220,7 +219,7 @@ $("#app").on("click", ".join-game-btn", function() {
 var gameId = $(this).data("game");
 $.post("/api/game/"+gameId+"/players").done(function(response) {
 $(".fail-joining-game-alert").html("");
-location.assign("/web/game.html?gp="+response.gpid);
+location.assign("/web/game.html?gp="+response.gpId);
 }).fail(function() {
 $(".fail-joining-game-alert").html("");
 $(".fail-joining-game-alert").filter("[data-game="+gameId+"]").html("Game is full");
