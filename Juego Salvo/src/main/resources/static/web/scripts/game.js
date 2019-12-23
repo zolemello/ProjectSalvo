@@ -9,7 +9,9 @@ getGameData(gp,true)
 function getGameData(gpId, viewShips){
 
 	document.getElementById("dock").innerHTML = `<div id="display">
-									                <p>TABLERO DE JUEGO</p>
+													
+													<p>TIME TO PLAY</p>
+													
 									            </div>
 									            <div id="board">
 

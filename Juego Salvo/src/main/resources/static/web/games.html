@@ -62,10 +62,10 @@
                 </form>
 
 
-                <form id="logout-form">
+              <form id="logout-form">
                     <span id="logged-in-name" class="align-middle mx-3"></span>
                     <button id="botonLogout" type="button" class="btn btn-dark">Logout</button>
-                </form>
+                </form> 
             </div>
 
         </div>
@@ -94,10 +94,10 @@
                                 Log in
                             </button>
 
-                       <!--    <button v-if="current_player !== null" type="button" class="btn btn-primary login" data-toggle="modal" data-target="#login">
-                                Log Out
-                            </button>    
-                        VER COMO HACER PARA QUE APAREZCA EL BOTON DE LOGOUT DESPUES DE QUE SE HIZO LOGIN    -->
+               
+                     
+                            
+                          
 
 
                 </div>
@@ -137,7 +137,8 @@
                    <!-- TABLA DE JUEGOS -->
                     <h1>Games List</h1>
                     <div id="creation-game" class="mb-2">
-                        <button v-if="current_player !== null" type="button" id="new-game-btn" class="btn btn-dark btn-lg btn-block"><b>New Game</b></button>
+                        <button v-if="current_player !== null" type="button" id="new-game-btn" class="btn btn-primary btn-lg btn-block"><b>New Game</b></button>
+                        <button v-if="current_player !== null" type="button" id="botonLogout" class="btn btn-primary btn-lg btn-block"><b>Log Out</b></button>
                         <span id="fail-creation-game-alert"></span>
                     </div>
                     <ol>
@@ -146,16 +147,22 @@
                             <ol class="ml-5">
                                 <li v-for="player in game.players">
                                     {{player.email}}
+                                    
+                                        
                                     <div v-if="current_player !==null && current_player.id == player.id">
-                                        <button :data-game="player.gpId" type="button" class="rejoin-game-btn btn btn-dark btn-sm mt-2">Enter Game</button>
+                                        <button :data-game="player.gpId" type="button" class="rejoin-game-btn btn btn-primary btn-sm mt-2">Enter Game</button>
 
                                     </div>
                                 </li>
                             </ol>
-                            <div v-if="game.players.length < 2 && current_player !== null && current_player.id !== game.players[0].id">
-                                <button :data-game="game.id" type="button" class="join-game-btn btn btn-dark btn-sm mt-2">Join Game</button>
+                            <div v-if="(game.players.length == 1 || game.players.length == 0)  && current_player !== null && current_player.id !== game.players[0].id">
+                                <button :data-game="game.id" type="button" class="join-game-btn btn btn-primary btn-sm mt-2">Join Game</button>
                                 <span :data-game="game.id" class="fail-joining-game-alert text-red"></span>
-                            </div>
+                            </div>  
+
+                            
+                            
+                                       
                         </li>
                     </ol>
                 </div>
@@ -169,6 +176,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <script src="scripts/games2.js"></script>
 </body>
 </html>

@@ -30,6 +30,10 @@ body {
 
 .grid{
     display: none;
+    /*display: block;
+    border-radius: 0 0 10px 10px;
+    height: 330px;
+    width: 330px; */
 }
 
 .grid.active{
@@ -101,8 +105,8 @@ body {
 }
 
 #display {
-    color: rgb(0, 255, 0);
-    background-color: rgb(0, 0, 205);
+    color:darkblue;
+    background-color:lightblue;
     height: 25px;
     width: 75%;
     padding: 0.2rem;
@@ -132,7 +136,7 @@ body {
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
-  from, to { border-color: transparent }
+  from, to { border-color: black }
   50% { border-color: rgb(0, 255, 0); }
 }
 
